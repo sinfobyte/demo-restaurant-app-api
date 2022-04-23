@@ -59,7 +59,7 @@ namespace FOOD_APP_API_DEMO
             });
             app.UseSwaggerUI(x =>
             {
-                x.SwaggerEndpoint("../swagger/v1/swagger.json", "API V1.0");
+                x.SwaggerEndpoint("/swagger/v1/swagger.json", "API V1.0");
                 x.RoutePrefix = string.Empty;
             });
         }
