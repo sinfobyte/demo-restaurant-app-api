@@ -1,0 +1,86 @@
+# This workflow will run to build .NET application on self-hosted runner
+env:
+    build_path: 'BUILD'
+    deploy_script_path: 'D:\WebApps\'
+name: CI
+on:
+ push:
+ workflow_dispatch:
+  inputs:
+   name:
+    description: 'Who initiating this workflow?'
+    required: true
+   reason:
+    description: 'Reason for initiation?'
+    required: true
+jobs:
+  BUILD:
+    runs-on: self-hosted
+
+    outputs:
+      branch_name: ${{steps.SetBranchName.outputs.branch}}
+
+    steps:
+
+    - name: Set Branch Name
+      id: SetBranchName
+      run: |
+       $branchName = $Env:GITHUB_REF -replace "refs/heads/", ""
+       echo "::set-output name=branch::${branchName}"
+
+    - name: Chekout Repository
+      uses: actions/checkout@v2
+
+    - name: Get Properties
+      id: GetProperties
+      uses: doughepi/yaml-env-action@v1.0.0
+      with:
+       files: properties.yml
+
+    - name: Set Short Commit Hash
+      id: SetCommitHash
+      run: |
+       echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
+   
+    - name: Setup MSBuild
+      uses: microsoft/setup-msbuild@v1
+
+    - name: Build Solution
+      run: dotnet publish -c Release -r win-x64 --output BUILD TAC_API.sln  /p:VersionPrefix=${{env.APPLICATION_VERSION}}.${{github.run_number}} --self-contained=false
+      
+  DEPLOYMENT:
+     runs-on: self-hosted
+     needs: BUILD
+     if: contains(github.ref, 'feature/') == false
+     steps:
+     - name: Deploy Artifacts
+       run: |
+        %deploy_script_path%DEPLOYMENT_SCRIPTS\REST-APP-API\DEPLOYMENT.bat ${{needs.BUILD.outputs.branch_name}}  %GITHUB_WORKSPACE%\%build_path%
+       shell: cmd
+     
+  PUBLISH:
+     runs-on: self-hosted
+     needs: [BUILD, DEPLOYMENT]
+     if: contains(github.ref, 'release')
+     
+     steps:
+     - name: Checking Version Tag
+       uses: mukunku/tag-exists-action@v1.0.0
+       id: checkTag
+       with: 
+        tag: ${{env.APPLICATION_VERSION}}
+       env:
+           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+     
+     - name: Create Release
+       if: steps.checkTag.outputs.exists == 'false'
+       uses: avakar/tag-and-release@v1.0.0
+       with:
+        tag_name: ${{env.APPLICATION_VERSION}}.${{github.run_number}}
+        release_name: ${{env.APPLICATION_VERSION}}.${{github.run_number}}
+        body:  Version from ${{needs.BUILD.outputs.branch_name}} branch deployed by Github Actions
+        draft: false
+        prerelease: false
+        commit: ${{github.sha}}
+       env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
