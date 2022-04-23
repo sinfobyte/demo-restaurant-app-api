@@ -18,6 +18,7 @@ jobs:
     runs-on: self-hosted
 
     outputs:
+      version: ${{steps.GetProperties.outputs.version}}
       branch_name: ${{steps.SetBranchName.outputs.branch}}
 
     steps:
@@ -36,6 +37,11 @@ jobs:
       uses: doughepi/yaml-env-action@v1.0.0
       with:
        files: properties.yml
+
+    - name: Set Version Information
+      id: GetProperties
+      run: |
+       echo "::set-output name=version::${{env.APPLICATION_VERSION}}"
 
     - name: Set Short Commit Hash
       id: SetCommitHash
@@ -76,8 +82,8 @@ jobs:
        if: steps.checkTag.outputs.exists == 'false'
        uses: avakar/tag-and-release@v1.0.0
        with:
-        tag_name: ${{env.APPLICATION_VERSION}}.${{github.run_number}}
-        release_name: ${{env.APPLICATION_VERSION}}.${{github.run_number}}
+        tag_name: ${{needs.BUILD.outputs.version}}.${{github.run_number}}
+        release_name: ${{needs.BUILD.outputs.version}}.${{github.run_number}} - ${{needs.BUILD.outputs.branch_name}}
         body:  Version from ${{needs.BUILD.outputs.branch_name}} branch deployed by Github Actions
         draft: false
         prerelease: false
