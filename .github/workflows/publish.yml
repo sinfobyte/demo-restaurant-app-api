@@ -46,7 +46,7 @@ jobs:
       uses: microsoft/setup-msbuild@v1
 
     - name: Build Solution
-      run: dotnet publish -c Release -r win-x64 --output BUILD TAC_API.sln  /p:VersionPrefix=${{env.APPLICATION_VERSION}}.${{github.run_number}} --self-contained=false
+      run: dotnet publish -c Release -r win-x64 --output BUILD FOOD_APP_API_DEMO.sln  /p:VersionPrefix=${{env.APPLICATION_VERSION}}.${{github.run_number}} --self-contained=false
       
   DEPLOYMENT:
      runs-on: self-hosted
