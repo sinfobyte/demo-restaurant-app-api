@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>FOOD_APP_API_DEMO</name>
+    </assembly>
+    <members>
+        <member name="M:FOOD_APP_API_DEMO.Controllers.OrderStatusController.Post(FOOD_APP_API_DEMO.Models.Order)">
+            <summary>
+            Retrives order status in JSON format. For demo purpose it will return different status randomly
+            </summary>
+            <remarks>
+             <remark>**Order Status:**</remark>
+             <remark></remark>
+             <remark>Restaurant yet to accept order</remark>
+             <remark>Your Food is being cooked</remark>
+             <remark>Your Food is ready for pickup</remark>
+             <remark>Mr. Bob will deliver you food</remark>
+             <remark>Mr. Bob is on the way for delivery</remark>
+            </remarks>
+        </member>
+        <member name="P:FOOD_APP_API_DEMO.Models.Order.restaurant_id">
+            <summary>
+            Unique ID of restaurant
+            </summary>
+            <example>RST5879596</example>
+        </member>
+        <member name="P:FOOD_APP_API_DEMO.Models.Order.outlet_id">
+            <summary>
+            Restaurant's outlet ID
+            </summary>
+            <example>01</example>
+        </member>
+        <member name="P:FOOD_APP_API_DEMO.Models.Order.order_id">
+            <summary>
+            Placed Order ID
+            </summary>
+            <example>ORD4789675</example>
+        </member>
+        <member name="P:FOOD_APP_API_DEMO.Models.OrderStatusResponse.order_id">
+            <summary>
+            Placed Order ID
+            </summary>
+            <example>ORD4789650</example>
+        </member>
+        <member name="P:FOOD_APP_API_DEMO.Models.OrderStatusResponse.live_location">
+            <summary>
+            Delivery boy's live location to display on Map
+            </summary>
+        </member>
+        <member name="P:FOOD_APP_API_DEMO.Models.OrderStatusResponse.message">
+            <summary>
+            Order Status Message
+            </summary>
+            <example>Restaurant yet to accept order</example>
+        </member>
+        <member name="F:FOOD_APP_API_DEMO.Models.OrderStatusResponse.status_code">
+            <summary>
+            Order Status Response HTTP Status Code
+            </summary>
+            <example>200</example>
+        </member>
+        <member name="P:FOOD_APP_API_DEMO.Models.OrderStatusResponse.location_info">
+            <summary>
+            Delivery boy's live location Information
+            </summary>
+        </member>
+        <member name="P:FOOD_APP_API_DEMO.Models.LocationInfo.lat">
+            <summary>
+            Delivery boy's live location's latitude value
+            </summary>
+        </member>
+        <member name="P:FOOD_APP_API_DEMO.Models.LocationInfo.lng">
+            <summary>
+            Delivery boy's live location's longitude value
+            </summary>
+        </member>
+        <member name="P:FOOD_APP_API_DEMO.Models.LocationInfo.zoom_control">
+            <summary>
+            Whether zoom is enabled on Google Map
+            </summary>
+        </member>
+        <member name="P:FOOD_APP_API_DEMO.Models.LocationInfo.zoom_level">
+            <summary>
+            Google Map's zoom level
+            </summary>
+            <example>5</example>
+        </member>
+    </members>
+</doc>
