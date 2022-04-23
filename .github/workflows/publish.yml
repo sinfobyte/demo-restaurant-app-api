@@ -61,7 +61,7 @@ jobs:
   PUBLISH:
      runs-on: self-hosted
      needs: [BUILD, DEPLOYMENT]
-     if: contains(github.ref, 'release')
+     if: contains(github.ref, 'main')
      
      steps:
      - name: Checking Version Tag
