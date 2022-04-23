@@ -31,12 +31,12 @@ namespace FOOD_APP_API_DEMO
                 config.SwaggerDoc("v1", new OpenApiInfo {
                     Version = "v1",
                     Title = "Restaurant APP Demo API",
-                    Description = "## UI for testing demo API",
+                    Description = $"## UI for testing demo API - {GetType().Assembly.GetName().Version.ToString()}",
                     Contact = new OpenApiContact
                     {
                         Name = "Sayed Shahidain",
                         Email = string.Empty,
-                        Url = new Uri("https://github.com/shahidain"),
+                        Url = new Uri("https://github.com/almsoftware/demo-restaurant-app-api")
                     }
                 });
                 string filePath = Path.Combine(AppContext.BaseDirectory, "FOOD_APP_API_DEMO.xml");
