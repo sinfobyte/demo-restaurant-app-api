@@ -6,10 +6,10 @@
     <members>
         <member name="M:FOOD_APP_API_DEMO.Controllers.OrderStatusController.Post(FOOD_APP_API_DEMO.Models.Order)">
             <summary>
-            Retrives order status in JSON format. For demo purpose it will return different status randomly
+            Retrives order status in JSON format. For demo purpose it will return different status messages randomly
             </summary>
             <remarks>
-             <remark>**Order Status:**</remark>
+             <remark>**Order Status Messages:**</remark>
              <remark></remark>
              <remark>Restaurant yet to accept order</remark>
              <remark>Your Food is being cooked</remark>

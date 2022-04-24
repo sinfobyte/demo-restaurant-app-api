@@ -20,10 +20,10 @@ namespace FOOD_APP_API_DEMO.Controllers
             random = new Random();
         }
         /// <summary>
-        /// Retrives order status in JSON format. For demo purpose it will return different status randomly
+        /// Retrives order status in JSON format. For demo purpose it will return different status messages randomly
         /// </summary>
         /// <remarks>
-        ///  <remark>**Order Status:**</remark>
+        ///  <remark>**Order Status Messages:**</remark>
         ///  <remark></remark>
         ///  <remark>Restaurant yet to accept order</remark>
         ///  <remark>Your Food is being cooked</remark>
