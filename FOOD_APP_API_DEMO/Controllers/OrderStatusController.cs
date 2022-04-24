@@ -30,6 +30,7 @@ namespace FOOD_APP_API_DEMO.Controllers
         ///  <remark>Your Food is ready for pickup</remark>
         ///  <remark>Bob will deliver you food</remark>
         ///  <remark>Bob has picked-up for delivery</remark>
+        ///  <remark>Bob is on the way for delivery</remark>
         /// </remarks>
         [HttpPost]
         public ActionResult<OrderStatusResponse> Post(Order order)
@@ -84,6 +85,7 @@ namespace FOOD_APP_API_DEMO.Controllers
                     orderStatusResponse.message = OrderStatusMessages.PICKED_UP_FOR_DELIVERY;
                     break;
                 case 6:
+                    orderStatusResponse.message = OrderStatusMessages.ON_THE_WAY_FOR_DELIVERY;
                     orderStatusResponse.live_location = true;
                     orderStatusResponse.location_info = new LocationInfo()
                     {
