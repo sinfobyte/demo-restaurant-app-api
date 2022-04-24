@@ -29,7 +29,7 @@ namespace FOOD_APP_API_DEMO.Controllers
         ///  <remark>Your Food is being cooked</remark>
         ///  <remark>Your Food is ready for pickup</remark>
         ///  <remark>Bob will deliver you food</remark>
-        ///  <remark>Bob has picked-up for delivery</remark>
+        ///  <remark>Bob has picked-up order for delivery</remark>
         ///  <remark>Bob is on the way for delivery</remark>
         /// </remarks>
         [HttpPost]
@@ -104,6 +104,5 @@ namespace FOOD_APP_API_DEMO.Controllers
             }
             return orderStatusResponse;
         }
-        
     }
 }
