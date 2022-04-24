@@ -14,8 +14,8 @@
              <remark>Restaurant yet to accept order</remark>
              <remark>Your Food is being cooked</remark>
              <remark>Your Food is ready for pickup</remark>
-             <remark>Mr. Bob will deliver you food</remark>
-             <remark>Mr. Bob is on the way for delivery</remark>
+             <remark>Bob will deliver you food</remark>
+             <remark>Bob has picked-up for delivery</remark>
             </remarks>
         </member>
         <member name="P:FOOD_APP_API_DEMO.Models.Order.restaurant_id">
