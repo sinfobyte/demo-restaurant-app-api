@@ -35,7 +35,7 @@ namespace FOOD_APP_API_DEMO
                     Contact = new OpenApiContact
                     {
                         Name = "Sayed Shahidain",
-                        Email = string.Empty,
+                        Email = "mohd.shahidain@gmail.com",
                         Url = new Uri("https://github.com/almsoftware/demo-restaurant-app-api")
                     }
                 });
