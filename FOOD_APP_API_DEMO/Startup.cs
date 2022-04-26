@@ -29,7 +29,7 @@ namespace FOOD_APP_API_DEMO
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddSwaggerGen(config => {
                 config.SwaggerDoc("v1", new OpenApiInfo {
-                    Version = "v1",
+                    Version = string.Empty,
                     Title = "Restaurant APP Demo API",
                     Description = $"## UI for testing demo API - {GetType().Assembly.GetName().Version.ToString()}",
                     Contact = new OpenApiContact
