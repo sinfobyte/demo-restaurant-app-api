@@ -39,16 +39,13 @@ jobs:
 
     - name: Set Version Information
       id: GetProperties
-      run: |
-       echo "::set-output name=version::${{env.APPLICATION_VERSION}}"
+      shell: bash
+      run: echo "::set-output name=version::${{env.APPLICATION_VERSION}}"
 
     - name: Set Short Commit Hash
       id: SetCommitHash
-      run: |
-       echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
-   
-    - name: Setup MSBuild
-      uses: microsoft/setup-msbuild@v1
+      shell: bash
+      run: echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
 
     - name: Build Solution
       run: dotnet publish -c Release -r linux-x64 --output BUILD /p:VersionPrefix=${{env.APPLICATION_VERSION}}.${{github.run_number}} --self-contained true
