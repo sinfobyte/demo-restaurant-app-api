@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -47,15 +48,25 @@ namespace FOOD_APP_API_DEMO
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseForwardedHeaders(new ForwardedHeadersOptions
+            {
+                ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+            });
             app.UseMvc();
             app.UseSwagger(x =>
             {
                 x.SerializeAsV2 = true;
+                x.PreSerializeFilters.Add((swaggerDoc, httpReq) => {
+                    if (env.EnvironmentName == "Production")
+                    {
+                        string serverUrl = $"{httpReq.Scheme}://{httpReq.Headers["X-Forwarded-Host"]}";
+                        swaggerDoc.Servers = new List<OpenApiServer> { new OpenApiServer { Url = serverUrl } };
+                    }
+                });
             });
             app.UseSwaggerUI(x =>
             {
