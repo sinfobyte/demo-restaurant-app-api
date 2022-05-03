@@ -4,7 +4,7 @@ Demo API for restaurant APP order status check
 
 API Swagger UI URL
 
-* https://almsoftware.in/demo-rest-app-api/index.html
+* https://demo-rest-app-api.infobyte.in/index.html
 
 ## Contribution Instructions
 
