@@ -69,7 +69,7 @@ jobs:
        with: 
         tag: ${{needs.BUILD.outputs.version}}.${{github.run_number}}
        env:
-           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+           GITHUB_TOKEN: ${{secrets.PERSONAL_ACCESS_TOKEN}}
      
      - name: Create Release
        if: steps.checkTag.outputs.exists == 'false'
@@ -82,4 +82,4 @@ jobs:
         prerelease: false
         commit: ${{github.sha}}
        env:
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}} 
+          GITHUB_TOKEN: ${{secrets.PERSONAL_ACCESS_TOKEN}} 
