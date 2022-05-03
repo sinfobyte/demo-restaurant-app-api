@@ -49,4 +49,12 @@ jobs:
 
     - name: Build Solution
       run: dotnet publish -c Release -r linux-x64 --output BUILD /p:VersionPrefix=${{env.APPLICATION_VERSION}}.${{github.run_number}} --self-contained true
-     
+
+  DEPLOYMENT:
+    runs-on: self-hosted
+    needs: BUILD
+    steps:
+    - name: Deploy Artifacts
+      shell: bash
+      run: "%deploy_script_path%demo-rest-app-api/deployment.sh"
+    
