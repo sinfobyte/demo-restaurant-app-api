@@ -57,5 +57,5 @@ jobs:
     - name: Deploy Artifacts
       shell: bash
       run: |
-       %deploy_script_path%demo-rest-app-api/deployment.sh
+       \home\runner_scripts\demo-rest-app-api\deployment.sh
     
