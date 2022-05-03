@@ -56,5 +56,6 @@ jobs:
     steps:
     - name: Deploy Artifacts
       shell: bash
-      run: "%deploy_script_path%demo-rest-app-api/deployment.sh"
+      run: |
+       %deploy_script_path%demo-rest-app-api/deployment.sh
     
