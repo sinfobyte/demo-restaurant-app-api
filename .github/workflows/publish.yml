@@ -58,8 +58,8 @@ jobs:
     steps:
 
     - name: Get Config Files
-       uses: actions/checkout@v2
-       with:
+      uses: actions/checkout@v2
+      with:
         repository: '${{github.repository_owner}}/${{env.config_files}}'
         path: '${{env.config_files}}'
         token: ${{secrets.PERSONAL_ACCESS_TOKEN}}
