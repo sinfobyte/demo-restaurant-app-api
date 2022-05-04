@@ -1,0 +1,57 @@
+# This workflow will run to build .NET application on self-hosted runner
+# $GITHUB_WORKSPACE/${{env.config_files}}/${{env.config_file_dir}}/deployment.sh - Need to fix permission issue
+env:
+    config_files: 'config-files'
+    config_file_dir: 'demo-rest-app-api'
+    deployment_script: '/home/runner_scripts/demo-rest-app-api/'
+name: CI
+on:
+ workflow_dispatch:
+  inputs:
+   name:
+    description: 'Who initiating this workflow?'
+    required: true
+   reason:
+    description: 'Reason for initiation?'
+    required: true
+
+ push:
+  branches-ignore:
+   - 'main'
+
+jobs:
+  BUILD:
+    runs-on: self-hosted
+
+    outputs:
+      version: ${{steps.GetProperties.outputs.version}}
+      branch_name: ${{steps.SetBranchName.outputs.branch}}
+
+    steps:
+
+    - name: Set Branch Name
+      id: SetBranchName
+      shell: bash
+      run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+
+    - name: Chekout Repository
+      uses: actions/checkout@v2
+
+    - name: Get Properties
+      id: GetYMLfileProperties
+      uses: doughepi/yaml-env-action@v1.0.0
+      with:
+       files: properties.yml
+
+    - name: Set Version Information
+      id: GetProperties
+      shell: bash
+      run: echo "::set-output name=version::${{env.APPLICATION_VERSION}}"
+
+    - name: Set Short Commit Hash
+      id: SetCommitHash
+      shell: bash
+      run: echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
+
+    - name: Build Solution
+      run: dotnet publish -c Release -r linux-x64 --output BUILD /p:VersionPrefix=${{env.APPLICATION_VERSION}}.${{github.run_number}} --self-contained true

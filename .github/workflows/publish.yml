@@ -6,7 +6,6 @@ env:
     deployment_script: '/home/runner_scripts/demo-rest-app-api/'
 name: CI
 on:
- push:
  workflow_dispatch:
   inputs:
    name:
@@ -15,6 +14,11 @@ on:
    reason:
     description: 'Reason for initiation?'
     required: true
+
+ push:
+  branches:
+   - 'main'
+
 jobs:
   BUILD:
     runs-on: self-hosted
