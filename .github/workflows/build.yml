@@ -4,7 +4,7 @@ env:
     config_files: 'config-files'
     config_file_dir: 'demo-rest-app-api'
     deployment_script: '/home/runner_scripts/demo-rest-app-api/'
-name: CI
+name: BUILD
 on:
  workflow_dispatch:
   inputs:
