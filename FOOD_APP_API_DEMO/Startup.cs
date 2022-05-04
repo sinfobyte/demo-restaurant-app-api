@@ -37,7 +37,7 @@ namespace FOOD_APP_API_DEMO
                     {
                         Name = "Sayed Shahidain",
                         Email = "mohd.shahidain@gmail.com",
-                        Url = new Uri("https://github.com/almsoftware/demo-restaurant-app-api")
+                        Url = new Uri("https://github.com/sinfobyte/demo-restaurant-app-api")
                     }
                 });
                 string filePath = Path.Combine(AppContext.BaseDirectory, "FOOD_APP_API_DEMO.xml");
