@@ -2,6 +2,8 @@
 env:
     build_path: 'Path for build folder'
     deploy_script_path: 'Path for directory containing shell scripts'
+    config_files: 'config-files'
+    config_file_dir: 'demo-rest-app-api'
 name: CI
 on:
  push:
@@ -54,6 +56,14 @@ jobs:
     runs-on: self-hosted
     needs: BUILD
     steps:
+
+    - name: Get Config Files
+       uses: actions/checkout@v2
+       with:
+        repository: '${{github.repository_owner}}/${{env.config_files}}'
+        path: '${{env.config_files}}'
+        token: ${{secrets.PERSONAL_ACCESS_TOKEN}}
+
     - name: Deploy Artifacts
       shell: bash
       run: |
