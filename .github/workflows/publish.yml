@@ -1,7 +1,7 @@
 # This workflow will run to build .NET application on self-hosted runner
 env:
     build_path: 'Path for build folder'
-    deploy_script_path: 'Path for directory containing shell scripts'
+    deploy_script_path: '/home/runner_scripts/demo-rest-app-api/'
     config_files: 'config-files'
     config_file_dir: 'demo-rest-app-api'
 name: CI
@@ -57,7 +57,7 @@ jobs:
     needs: BUILD
     steps:
 
-    - name: Get Config Files
+    - name: Configuration Files
       uses: actions/checkout@v2
       with:
         repository: '${{github.repository_owner}}/${{env.config_files}}'
@@ -67,7 +67,7 @@ jobs:
     - name: Deploy Artifacts
       shell: bash
       run: |
-       /home/runner_scripts/demo-rest-app-api/deployment.sh
+       ${{env.deploy_script_path}}deployment.sh
 
   PUBLISH:
      runs-on: self-hosted
