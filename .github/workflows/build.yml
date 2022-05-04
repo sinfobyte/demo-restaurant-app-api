@@ -1,9 +1,3 @@
-# This workflow will run to build .NET application on self-hosted runner
-# $GITHUB_WORKSPACE/${{env.config_files}}/${{env.config_file_dir}}/deployment.sh - Need to fix permission issue
-env:
-    config_files: 'config-files'
-    config_file_dir: 'demo-rest-app-api'
-    deployment_script: '/home/runner_scripts/demo-rest-app-api/'
 name: BUILD
 on:
  workflow_dispatch:
