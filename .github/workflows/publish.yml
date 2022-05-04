@@ -1,7 +1,9 @@
 # This workflow will run to build .NET application on self-hosted runner
+# $GITHUB_WORKSPACE/${{env.config_files}}/${{env.config_file_dir}}/deployment.sh - Need to fix permission issue
 env:
     config_files: 'config-files'
     config_file_dir: 'demo-rest-app-api'
+    deployment_file: '/home/runner_scripts/demo-rest-app-api/'
 name: CI
 on:
  push:
@@ -65,7 +67,7 @@ jobs:
     - name: Deploy Artifacts
       shell: bash
       run: |
-       $GITHUB_WORKSPACE/${{env.config_files}}/${{env.config_file_dir}}/deployment.sh
+       ${{env.deploy_script_path}}deployment.sh
 
   PUBLISH:
      runs-on: self-hosted
