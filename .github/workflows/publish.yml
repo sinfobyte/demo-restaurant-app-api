@@ -65,7 +65,7 @@ jobs:
     - name: Deploy Artifacts
       shell: bash
       run: |
-       ${{env.GITHUB_WORKSPACE}}/${{env.config_files}}/${{env.config_file_dir}}/deployment.sh
+       ${{GITHUB_WORKSPACE}}/${{env.config_files}}/${{env.config_file_dir}}/deployment.sh
 
   PUBLISH:
      runs-on: self-hosted
