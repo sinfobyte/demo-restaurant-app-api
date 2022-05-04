@@ -60,7 +60,8 @@ namespace FOOD_APP_API_DEMO
             app.UseSwagger(x =>
             {
                 x.SerializeAsV2 = true;
-                x.PreSerializeFilters.Add((swaggerDoc, httpReq) => {
+                x.PreSerializeFilters.Add((swaggerDoc, httpReq) => 
+                {
                     if (env.EnvironmentName == "Production")
                     {
                         string serverUrl = $"{httpReq.Scheme}://{httpReq.Headers["X-Forwarded-Host"]}";
