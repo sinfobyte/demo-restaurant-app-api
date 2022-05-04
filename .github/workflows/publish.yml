@@ -62,7 +62,7 @@ jobs:
       with:
         repository: '${{github.repository_owner}}/${{env.config_files}}'
         path: '${{env.config_files}}'
-        token: ${{secrets.PERSONAL_ACCESS_TOKEN}}
+        token: ${{secrets.ACCESS_TOKEN}}
 
     - name: Deploy Artifacts
       shell: bash
