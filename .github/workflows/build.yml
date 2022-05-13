@@ -19,14 +19,8 @@ jobs:
 
     outputs:
       version: ${{steps.GetProperties.outputs.version}}
-      branch_name: ${{steps.SetBranchName.outputs.branch}}
-
+      
     steps:
-
-    - name: Set Branch Name
-      id: SetBranchName
-      shell: bash
-      run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
 
     - name: Chekout Repository
       uses: actions/checkout@v2
@@ -41,11 +35,6 @@ jobs:
       id: GetProperties
       shell: bash
       run: echo "::set-output name=version::${{env.APPLICATION_VERSION}}"
-
-    - name: Set Short Commit Hash
-      id: SetCommitHash
-      shell: bash
-      run: echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
 
     - name: Build Solution
       run: dotnet publish -c Release -r linux-x64 --output BUILD /p:VersionPrefix=${{env.APPLICATION_VERSION}}.${{github.run_number}} --self-contained true

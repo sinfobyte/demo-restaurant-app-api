@@ -3,7 +3,7 @@
 env:
     config_files: 'config-files'
     config_file_dir: 'demo-rest-app-api'
-    deployment_script: '/home/runner_scripts/demo-rest-app-api/'
+    deployment_script: '/home/runner_scripts'
 name: CI
 on:
  workflow_dispatch:
@@ -71,7 +71,7 @@ jobs:
     - name: Deploy Artifacts
       shell: bash
       run: |
-       ${{env.deployment_script}}deployment.sh
+       ${{env.deployment_script}}/demo-rest-app-api/deployment.sh
 
   PUBLISH:
      runs-on: self-hosted
