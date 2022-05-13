@@ -70,7 +70,7 @@ jobs:
         path: '${{env.config_files}}'
         token: ${{secrets.ACCESS_TOKEN}}
 
-    - name: Deploy Artifacts
+    - name: Deploy Application Artifacts
       shell: bash
       run: |
        ${{env.deployment_script}}/demo-rest-app-api/deployment.sh ${{env.repo_name}} ${{github.sha}} ${{needs.BUILD.outputs.branch_name}}
