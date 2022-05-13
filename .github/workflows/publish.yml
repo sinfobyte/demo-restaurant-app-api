@@ -87,7 +87,7 @@ jobs:
        env:
            GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
      
-     - name: Create Release
+     - name: Create GitHub Release
        if: steps.checkTag.outputs.exists == 'false'
        uses: avakar/tag-and-release@v1.0.0
        with:
