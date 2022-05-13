@@ -79,23 +79,7 @@ jobs:
      runs-on: self-hosted
      needs: [BUILD, DEPLOYMENT]
      steps:
-     - name: Checking Version Tag
-       uses: mukunku/tag-exists-action@v1.0.0
-       id: checkTag
-       with: 
-        tag: ${{needs.BUILD.outputs.version}}.${{github.run_number}}
-       env:
-           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-     
      - name: Create GitHub Release
-       if: steps.checkTag.outputs.exists == 'false'
-       uses: avakar/tag-and-release@v1.0.0
-       with:
-        tag_name: ${{needs.BUILD.outputs.version}}.${{github.run_number}}
-        release_name: ${{needs.BUILD.outputs.version}}.${{github.run_number}} - ${{needs.BUILD.outputs.branch_name}}
-        body:  Automated deployment from ${{needs.BUILD.outputs.branch_name}} branch deployed by Github Actions
-        draft: false
-        prerelease: false
-        commit: ${{github.sha}}
-       env:
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}} 
+       shell: bash
+       run: |
+        ${{env.deployment_script}}/demo-rest-app-api/release.sh ${{env.repo_name}} ${{needs.BUILD.outputs.branch_name}} ${{needs.BUILD.outputs.version}}.${{github.run_number}} ${{github.sha}}
