@@ -71,7 +71,7 @@ jobs:
     - name: Deploy Artifacts
       shell: bash
       run: |
-       ${{env.deployment_script}}/demo-rest-app-api/deployment.sh
+       ${{env.deployment_script}}/demo-rest-app-api/deployment.sh ${{needs.BUILD.outputs.branch_name}}
 
   PUBLISH:
      runs-on: self-hosted
