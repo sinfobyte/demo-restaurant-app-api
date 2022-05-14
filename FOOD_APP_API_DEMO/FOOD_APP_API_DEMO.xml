@@ -37,6 +37,24 @@
             </summary>
             <example>ORD4789675</example>
         </member>
+        <member name="P:FOOD_APP_API_DEMO.Models.OrderStatusResponseBadRequest.order_id">
+            <summary>
+            Placed Order ID
+            </summary>
+            <example>ORD4789650</example>
+        </member>
+        <member name="P:FOOD_APP_API_DEMO.Models.OrderStatusResponseBadRequest.message">
+            <summary>
+            Order Status Message
+            </summary>
+            <example>Fault Message</example>
+        </member>
+        <member name="P:FOOD_APP_API_DEMO.Models.OrderStatusResponseBadRequest.status_code">
+            <summary>
+            Order Status Response HTTP Status Code
+            </summary>
+            <example>400</example>
+        </member>
         <member name="P:FOOD_APP_API_DEMO.Models.OrderStatusResponse.order_id">
             <summary>
             Placed Order ID
@@ -54,7 +72,7 @@
             </summary>
             <example>Restaurant yet to accept order</example>
         </member>
-        <member name="F:FOOD_APP_API_DEMO.Models.OrderStatusResponse.status_code">
+        <member name="P:FOOD_APP_API_DEMO.Models.OrderStatusResponse.status_code">
             <summary>
             Order Status Response HTTP Status Code
             </summary>

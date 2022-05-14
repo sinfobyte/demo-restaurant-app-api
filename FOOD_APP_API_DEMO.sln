@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.1401
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FOOD_APP_API_DEMO", "FOOD_APP_API_DEMO\FOOD_APP_API_DEMO.csproj", "{AD783BA3-1784-4348-A1B9-8D0879EA920C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FOOD_APP_API_DEMO", "FOOD_APP_API_DEMO\FOOD_APP_API_DEMO.csproj", "{AD783BA3-1784-4348-A1B9-8D0879EA920C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Properties", "Properties", "{59A957CF-6B7A-4025-BCDD-50DB2FF0DC6A}"
 	ProjectSection(SolutionItems) = preProject

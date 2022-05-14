@@ -28,6 +28,7 @@ namespace FOOD_APP_API_DEMO
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            
             services.AddSwaggerGen(config => {
                 config.SwaggerDoc("v1", new OpenApiInfo {
                     Version = string.Empty,
@@ -42,6 +43,7 @@ namespace FOOD_APP_API_DEMO
                 });
                 string filePath = Path.Combine(AppContext.BaseDirectory, "FOOD_APP_API_DEMO.xml");
                 config.IncludeXmlComments(filePath);
+                config.EnableAnnotations();
             });
         }
 

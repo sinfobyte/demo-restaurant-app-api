@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using FOOD_APP_API_DEMO.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ApplicationModels;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace FOOD_APP_API_DEMO.Controllers
 {
@@ -32,8 +34,11 @@ namespace FOOD_APP_API_DEMO.Controllers
         ///  <remark>Bob has picked-up order for delivery</remark>
         ///  <remark>Bob is on the way for delivery</remark>
         /// </remarks>
+        
+        [SwaggerResponse(400, null, typeof(OrderStatusResponseBadRequest))]
+        [SwaggerResponse(200, null, typeof(OrderStatusResponse))]
         [HttpPost]
-        public ActionResult<OrderStatusResponse> Post(Order order)
+        public ActionResult<object> Post(Order order)
         {
             if (string.IsNullOrEmpty(order.order_id))
                 Response.StatusCode = Convert.ToInt32(HttpStatusCode.BadRequest);
@@ -46,7 +51,7 @@ namespace FOOD_APP_API_DEMO.Controllers
             Regex regex = new Regex("(([a-zA-Z]{3})[0-9]{7})");
             return regex.IsMatch(id);
         }
-        private OrderStatusResponse GetOrderResponse(Order order)
+        private object GetOrderResponse(Order order)
         {
             int randomStatus = random.Next(1, 7);
             OrderStatusResponse orderStatusResponse = new OrderStatusResponse()
@@ -54,6 +59,11 @@ namespace FOOD_APP_API_DEMO.Controllers
                 status_code = Convert.ToInt32(HttpStatusCode.OK),
                 live_location = false,
                 order_id = order.order_id
+            };
+            OrderStatusResponseBadRequest orderStatusResponseBadRequest = new OrderStatusResponseBadRequest()
+            {
+                order_id = order.order_id,
+                status_code = Convert.ToInt32(HttpStatusCode.BadRequest)
             };
             if (!ValidateId(order.order_id))
             {
@@ -96,13 +106,34 @@ namespace FOOD_APP_API_DEMO.Controllers
                     };
                     break;
                 case 7:
-                    orderStatusResponse.message = "Invalid Order ID";
+                    orderStatusResponseBadRequest.message = "Invalid Order ID";
                     break;
                 case 8:
-                    orderStatusResponse.message = "Invalid Restaurant ID";
+                    orderStatusResponseBadRequest.message = "Invalid Restaurant ID";
                     break;
             }
+            if (randomStatus == 7 || randomStatus == 8) return orderStatusResponseBadRequest;
             return orderStatusResponse;
+        }
+    }
+
+    public class ControllerDocumentationConvention : IControllerModelConvention
+    {
+        void IControllerModelConvention.Apply(ControllerModel controller)
+        {
+            if (controller == null)
+                return;
+
+            foreach (var attribute in controller.Attributes)
+            {
+                if (attribute.GetType() == typeof(RouteAttribute))
+                {
+                    var routeAttribute = (RouteAttribute)attribute;
+                    if (!string.IsNullOrWhiteSpace(routeAttribute.Name))
+                        controller.ControllerName = routeAttribute.Name;
+                }
+            }
+
         }
     }
 }

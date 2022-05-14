@@ -5,6 +5,27 @@ using System.Threading.Tasks;
 
 namespace FOOD_APP_API_DEMO.Models
 {
+    public class OrderStatusResponseBadRequest
+    {
+        /// <summary>
+        /// Placed Order ID
+        /// </summary>
+        /// <example>ORD4789650</example>
+        public string order_id { get; set; }
+       
+        /// <summary>
+        /// Order Status Message
+        /// </summary>
+        /// <example>Fault Message</example>
+        public string message { get; set; }
+
+        /// <summary>
+        /// Order Status Response HTTP Status Code
+        /// </summary>
+        /// <example>400</example>
+        public int status_code { get; set; }
+       
+    }
     public class OrderStatusResponse
     {
         /// <summary>
@@ -27,7 +48,7 @@ namespace FOOD_APP_API_DEMO.Models
         /// Order Status Response HTTP Status Code
         /// </summary>
         /// <example>200</example>
-        public int status_code = 200;
+        public int status_code { get; set; }
 
         /// <summary>
         /// Delivery boy's live location Information
